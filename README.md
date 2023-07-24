@@ -1,3 +1,1 @@
-# deadwood
-
 Web scraper

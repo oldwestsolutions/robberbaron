@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robberbaron.ai - AI & IoT Education Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #e11d48;
+            --primary-dark: #be123c;
+            --secondary: #1e40af;
+            --secondary-dark: #1e3a8a;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f3f4f6;
+            --border: #374151;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #0a0a0a;
+        }
+
+        nav {
+            background: rgba(17, 24, 39, 0.95);
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.2));
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .app-store-btn img {
+            height: 40px;
+            transition: transform 0.2s;
+        }
+
+        .app-store-btn:hover img {
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            padding: 8rem 2rem 6rem;
+            background: linear-gradient(to bottom, var(--darker), #000);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--secondary) 0%, transparent 50%);
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+        }
+
+        .learn-more-box {
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .learn-more-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .learn-more-box p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+        }
+
+        .learn-more-btn:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-card {
+            background: rgba(31, 41, 55, 0.5);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.3s;
+        }
+
+        .hero-card:hover {
+            transform: perspective(1000px) rotateY(-2deg) translateY(-10px);
+        }
+
+        .hero-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .hero-card p {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .features {
+            padding: 6rem 2rem;
+            background: var(--darker);
+            border-top: 1px solid var(--border);
+        }
+
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-title p {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(31, 41, 55, 0.5);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(225, 29, 72, 0.2);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-icon">R</div>
+                Robberbaron.ai
+            </div>
+            <div class="nav-links">
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Transform Education Through AI</h1>
+                <p>Harness the power of artificial intelligence and IoT technology to revolutionize the way we learn and teach in the digital age.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="cta-button">
+                        Login
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="learn-more-box">
+                    <h3>Join Robberbaron.ai Today</h3>
+                    <p>Experience the future of education with our cutting-edge AI platform designed for modern learning.</p>
+                    <a href="#" class="learn-more-btn">
+                        Create Account
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <h3>AI-Powered Analytics Dashboard</h3>
+                    <img src="/api/placeholder/400/300" alt="Analytics Dashboard" style="width: 100%; border-radius: 8px;">
+                    <p>Real-time insights and performance metrics powered by advanced machine learning algorithms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-content">
+            <div class="section-title">
+                <h2>Revolutionary Features</h2>
+                <p>Discover how Robberbaron.ai is reshaping the future of education</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3>Neural Learning Paths</h3>
+                    <p>Advanced AI algorithms create personalized learning experiences tailored to each student's unique needs and pace.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Smart Environment</h3>
+                    <p>IoT-enabled classrooms that automatically adjust to optimal learning conditions through real-time environmental monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Predictive Analytics</h3>
+                    <p>Advanced machine learning models that forecast student performance and identify areas for improvement before issues arise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits" style="background: #000; padding: 6rem 2rem; border-top: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-title">
+                <h2>Why Choose Robberbaron.ai</h2>
+                <p>Experience the future of education with our cutting-edge platform</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="feature-card" style="background: rgba(225, 29, 72, 0.1);">
+                    <h3>Advanced AI Technology</h3>
+                    <p>State-of-the-art machine learning algorithms that adapt to each student's learning style and pace.</p>
+                </div>
+                <div class="feature-card" style="background: rgba(30, 64, 175, 0.1);">
+                    <h3>Real-time Insights</h3>
+                    <p>Instant performance analytics and progress tracking to optimize the learning experience.</p>
+                </div>
+                <div class="feature-card" style="background: rgba(31, 41, 55, 0.5);">
+                    <h3>Seamless Integration</h3>
+                    <p>Easy integration with existing educational systems and learning management platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" style="background: var(--darker); padding: 6rem 2rem; border-top: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-title">
+                <h2>Simple Pricing</h2>
+                <p>Choose the perfect plan for your educational needs</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="feature-card">
+                    <h3 style="font-size: 1.5rem;">Starter</h3>
+                    <div style="font-size: 3rem; color: white; margin: 1rem 0;">$299</div>
+                    <p style="margin-bottom: 2rem;">per month</p>
+                    <ul style="list-style: none; margin-bottom: 2rem; color: #94a3b8;">
+                        <li style="margin-bottom: 0.5rem;">✓ Up to 100 students</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Basic AI features</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Standard analytics</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Email support</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+                <div class="feature-card" style="border-color: var(--primary);">
+                    <h3 style="font-size: 1.5rem;">Professional</h3>
+                    <div style="font-size: 3rem; color: white; margin: 1rem 0;">$599</div>
+                    <p style="margin-bottom: 2rem;">per month</p>
+                    <ul style="list-style: none; margin-bottom: 2rem; color: #94a3b8;">
+                        <li style="margin-bottom: 0.5rem;">✓ Up to 500 students</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Advanced AI features</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Premium analytics</li>
+                        <li style="margin-bottom: 0.5rem;">✓ 24/7 support</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+                <div class="feature-card">
+                    <h3 style="font-size: 1.5rem;">Enterprise</h3>
+                    <div style="font-size: 3rem; color: white; margin: 1rem 0;">Custom</div>
+                    <p style="margin-bottom: 2rem;">Contact us</p>
+                    <ul style="list-style: none; margin-bottom: 2rem; color: #94a3b8;">
+                        <li style="margin-bottom: 0.5rem;">✓ Unlimited students</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Custom AI solutions</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Advanced analytics</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Dedicated support</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn" style="width: 100%; justify-content: center;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #000; padding: 6rem 2rem; text-align: center; border-top: 1px solid var(--border);">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Transform Education?</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">Join the future of learning with Robberbaron.ai's revolutionary AI-powered platform.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#" class="cta-button">Get Started</a>
+                <a href="#" class="learn-more-btn">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--darker); padding: 4rem 2rem; border-top: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto; color: #94a3b8;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div class="logo" style="font-size: 1.25rem;">
+                    <div class="logo-icon" style="width: 32px; height: 32px; font-size: 1rem;">R</div>
+                    Robberbaron.ai
+                </div>
+                <div style="display: flex; gap: 2rem;">
+                    <a href="#" style="color: #94a3b8; text-decoration: none;">Terms</a>
+                    <a href="#" style="color: #94a3b8; text-decoration: none;">Privacy</a>
+                    <a href="#" style="color: #94a3b8; text-decoration: none;">Contact</a>
+                </div>
+            </div>
+            <div style="text-align: center; color: #64748b; font-size: 0.875rem;">
+                © 2025 Robberbaron.ai. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

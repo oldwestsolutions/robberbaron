@@ -1,0 +1,67 @@
+<div class="dashboard">
+    <nav class="dashboard-nav">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-icon">R</div>
+                RobberBaron.ai
+            </div>
+            <div class="user-info">
+                <span>{{ userEmail }}</span>
+                <button (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-content">
+        <div class="market-overview">
+            <h2>Market Overview</h2>
+            <div class="market-grid">
+                <div class="market-card" *ngFor="let item of marketData | keyvalue">
+                    <h3>{{ item.key.toUpperCase() }}</h3>
+                    <div class="price">${{ item.value.price }}</div>
+                    <div class="change" [ngClass]="item.value.change.includes('+') ? 'positive' : 'negative'">
+                        {{ item.value.change }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trading-panel">
+            <div class="chart-container">
+                <!-- Add your preferred charting library here -->
+            </div>
+            <div class="trading-controls">
+                <div class="order-form">
+                    <h3>Place Order</h3>
+                    <select>
+                        <option>BTC/USD</option>
+                        <option>ETH/USD</option>
+                        <option>SPY</option>
+                    </select>
+                    <input type="number" placeholder="Amount">
+                    <button class="buy-btn">Buy</button>
+                    <button class="sell-btn">Sell</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="background: var(--darker); padding: 4rem 2rem; border-top: 1px solid var(--border);">
+    <div style="max-width: 1200px; margin: 0 auto; color: #94a3b8;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div class="logo" style="font-size: 1.25rem;">
+                <div class="logo-icon" style="width: 32px; height: 32px; font-size: 1rem;">R</div>
+                RobberBaron.ai
+            </div>
+            <div style="display: flex; gap: 2rem;">
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Terms</a>
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Privacy</a>
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Contact</a>
+            </div>
+        </div>
+        <div style="text-align: center; color: #64748b; font-size: 0.875rem;">
+            © 2025 RobberBaron.ai. All rights reserved. Trading involves risk. Only risk capital you're prepared to lose.
+        </div>
+    </div>
+</footer> 

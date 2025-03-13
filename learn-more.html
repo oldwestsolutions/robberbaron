@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - RobberBaron.ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #e11d48;
+            --primary-dark: #be123c;
+            --secondary: #1e40af;
+            --secondary-dark: #1e3a8a;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f3f4f6;
+            --border: #374151;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #0a0a0a;
+        }
+
+        nav {
+            background: rgba(17, 24, 39, 0.95);
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem;
+            color: white;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: rgba(31, 41, 55, 0.5);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(31, 41, 55, 0.3);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(225, 29, 72, 0.2);
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(225, 29, 72, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .feature-item:hover::after {
+            transform: translateX(100%);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(31, 41, 55, 0.3);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            animation: countUp 2s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .demo-video {
+            width: 100%;
+            border-radius: 12px;
+            margin: 2rem 0;
+            aspect-ratio: 16/9;
+            background: rgba(31, 41, 55, 0.3);
+            border: 1px solid var(--border);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16/9;
+            background: rgba(31, 41, 55, 0.3);
+            border: 1px solid var(--border);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Gradient text animation */
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, var(--primary), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 6s linear infinite;
+        }
+
+        /* Progress bars */
+        .progress-bar {
+            height: 6px;
+            background: rgba(31, 41, 55, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transform-origin: left;
+            animation: fillProgress 2s ease-out forwards;
+        }
+
+        @keyframes fillProgress {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        /* Trade Demo Styles */
+        .trade-demo {
+            background: rgba(31, 41, 55, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .chart-container {
+            height: 300px;
+            position: relative;
+            background: rgba(17, 24, 39, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .price-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            animation: tradePath 8s infinite;
+        }
+
+        .trade-marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            transform: translate(-50%, -50%);
+        }
+
+        .trade-marker.entry {
+            background: #10B981;
+            animation: showEntry 8s infinite;
+        }
+
+        .trade-marker.exit {
+            background: #6366F1;
+            animation: showExit 8s infinite;
+        }
+
+        .stop-loss-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(239, 68, 68, 0.5);
+            animation: adjustStopLoss 8s infinite;
+        }
+
+        .marker-label {
+            position: absolute;
+            background: rgba(17, 24, 39, 0.9);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            transform: translateY(-20px);
+        }
+
+        .trade-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(17, 24, 39, 0.3);
+            border-radius: 8px;
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-item .label {
+            display: block;
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-item .value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        @keyframes tradePath {
+            0% { transform: translateY(150px) scale(0.8); }
+            25% { transform: translateY(100px) scale(1); }
+            50% { transform: translateY(180px) scale(0.9); }
+            75% { transform: translateY(120px) scale(1.1); }
+            100% { transform: translateY(150px) scale(0.8); }
+        }
+
+        @keyframes showEntry {
+            0%, 10% { opacity: 0; transform: translate(-50%, 150px) scale(0); }
+            15%, 100% { opacity: 1; transform: translate(-50%, 150px) scale(1); }
+        }
+
+        @keyframes showExit {
+            0%, 75% { opacity: 0; transform: translate(-50%, 120px) scale(0); }
+            80%, 100% { opacity: 1; transform: translate(-50%, 120px) scale(1); }
+        }
+
+        @keyframes adjustStopLoss {
+            0% { transform: translateY(170px); opacity: 0; }
+            15% { transform: translateY(170px); opacity: 1; }
+            50% { transform: translateY(190px); }
+            75% { transform: translateY(140px); }
+            100% { transform: translateY(170px); }
+        }
+
+        /* Enhanced Feature Icons Animation */
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            animation: iconFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">R</div>
+                RobberBaron.ai
+            </a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1 class="gradient-text">Experience Next-Gen Trading</h1>
+
+        <div class="stats-grid reveal">
+            <div class="stat-item">
+                <div class="stat-number" data-target="99.9">0</div>
+                <p>Uptime Reliability</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 99.9%"></div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50ms</div>
+                <p>Average Response Time</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <p>Market Monitoring</p>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2>See It In Action</h2>
+            <div class="demo-container">
+                <div class="trade-demo">
+                    <div class="trade-visualization">
+                        <div class="chart-container">
+                            <div class="price-line"></div>
+                            <div class="trade-marker entry">
+                                <span class="marker-label">Entry</span>
+                            </div>
+                            <div class="stop-loss-line">
+                                <span class="sl-label">Dynamic Stop Loss</span>
+                            </div>
+                            <div class="trade-marker exit">
+                                <span class="marker-label">Exit</span>
+                            </div>
+                        </div>
+                        <div class="trade-details">
+                            <div class="detail-item">
+                                <span class="label">Entry Price:</span>
+                                <span class="value">$150.25</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Stop Loss:</span>
+                                <span class="value">$148.50</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Take Profit:</span>
+                                <span class="value">$153.75</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2>AI-Powered Safety Features</h2>
+            <p>Our platform incorporates advanced AI algorithms designed to protect your investments.</p>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <svg class="feature-icon floating" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <h3>Smart Stop Loss</h3>
+                    <p>Our AI continuously monitors market conditions and automatically adjusts stop-loss levels based on volatility patterns and market sentiment.</p>
+                </div>
+                <div class="feature-item">
+                    <svg class="feature-icon floating" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 12h20M2 12l4-4m-4 4l4 4M22 12l-4-4m4 4l-4 4"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <h3>Trend Reversal Detection</h3>
+                    <p>Advanced pattern recognition algorithms identify potential market reversals before they happen, giving you crucial early warnings.</p>
+                </div>
+                <div class="feature-item">
+                    <svg class="feature-icon floating" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    <h3>Risk Analysis Dashboard</h3>
+                    <p>Real-time risk assessment tools calculate your portfolio's exposure and suggest immediate actions to protect your investments.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Without Risk</h2>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <!-- Replace with actual screenshot -->
+                    <img src="simulator-screenshot.jpg" alt="Trading Simulator Interface">
+                </div>
+                <div class="gallery-item">
+                    <!-- Replace with actual screenshot -->
+                    <img src="backtesting-screenshot.jpg" alt="Backtesting Dashboard">
+                </div>
+                <div class="gallery-item">
+                    <!-- Replace with actual screenshot -->
+                    <img src="analysis-screenshot.jpg" alt="Analysis Tools">
+                </div>
+            </div>
+            <p>Perfect your trading strategy in our advanced simulation environment before risking real capital.</p>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Paper Trading Simulator</h3>
+                    <p>Test your strategies with real-time market data in a zero-risk environment. Our paper trading platform mirrors real market conditions, including realistic slippage and execution delays.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Strategy Backtesting</h3>
+                    <p>Run your trading strategies against historical market data to see how they would have performed. Test across different market conditions and time periods to validate your approach.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>AI Strategy Optimization</h3>
+                    <p>Our AI analyzes your trading patterns and suggests improvements to your strategy, helping you identify and eliminate common mistakes before trading with real money.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Advanced Trading Tools</h2>
+            <p>Access professional-grade tools designed to enhance your trading performance.</p>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Market Sentiment Analysis</h3>
+                    <p>Our AI processes news, social media, and market data in real-time to gauge market sentiment and predict potential price movements.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Portfolio Stress Testing</h3>
+                    <p>Simulate how your portfolio would perform under various market scenarios, from minor corrections to major market events.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Smart Trade Exit Signals</h3>
+                    <p>Receive AI-powered suggestions for optimal exit points based on technical analysis, market conditions, and historical patterns.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Educational Resources</h2>
+            <p>Build your trading knowledge with our comprehensive learning materials.</p>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Interactive Tutorials</h3>
+                    <p>Step-by-step guides to help you master our platform's features and develop effective trading strategies.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Strategy Library</h3>
+                    <p>Access a collection of pre-built trading strategies that you can study, modify, and implement in your simulated account.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Market Analysis Workshops</h3>
+                    <p>Join live sessions where our experts analyze market conditions and demonstrate how to use our tools effectively.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Ready to Trade Smarter?</h2>
+            <p>Join RobberBaron.ai today and experience the future of intelligent trading.</p>
+            <a href="login.html" class="cta-button">
+                Start Now
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>Contact Us</h2>
+            <p>Have questions? Our team is here to help.</p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <h3>Email</h3>
+                    <p>support@robberbaron.ai</p>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path>
+                    </svg>
+                    <h3>Live Chat</h3>
+                    <p>Available 24/7</p>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <h3>Phone</h3>
+                    <p>+1 (888) 123-4567</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll reveal
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+
+        // Number counter animation
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = parseFloat(stat.getAttribute('data-target'));
+            let current = 0;
+            const increment = target / 50;
+            const updateCount = () => {
+                if (current < target) {
+                    current += increment;
+                    stat.textContent = current.toFixed(1) + '%';
+                    requestAnimationFrame(updateCount);
+                } else {
+                    stat.textContent = target + '%';
+                }
+            };
+            updateCount();
+        });
+
+        // Demo tabs
+        const tabs = document.querySelectorAll('.demo-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                document.querySelector('.demo-tab.active').classList.remove('active');
+                document.querySelector('.demo-slide.active').classList.remove('active');
+                tab.classList.add('active');
+                document.querySelector(`.demo-slide[data-tab="${tabId}"]`).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 
